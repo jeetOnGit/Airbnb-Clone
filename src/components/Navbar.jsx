@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
 import '../App.css'
+import Language from './Language'
 
 function Navbar() {
   const [active, setActive] = useState("Stays")
-
+  const [showBox, setShowBox] = useState(false)
+  const [showLang, setShowLang] = useState(false)
   const activeTab = (currectTab) =>{
     setActive(currectTab)
   }
@@ -32,12 +34,21 @@ function Navbar() {
             <div>
               <ul className='flex justify-between gap-2 items-center'>
                 <li><Link to='/' className='hover:bg-[#f7f7f7] py-2 px-2 rounded-full text-[#222] font-medium'>Airbnb your home</Link></li>
-                <li><Link to='/' className='hover:bg-[#f7f7f7] py-1 px-2 rounded-full'><i className="fa-solid fa-globe" /></Link></li>
+                <li><Link to='/' className='hover:bg-[#f7f7f7] py-1 px-2 rounded-full' onClick={()=>setShowLang(!showLang)}><i className="fa-solid fa-globe" /></Link></li>
                 <li>
-                  <Link className='flex justify-between items-center border border-[#ddd] py-1 px-2 gap-5 rounded-full hover:shadow-[0_2px_4px_rgba(0,0,0,0.18)]'>
+                  <div className='userAuth flex justify-between items-center border border-[#ddd] py-1 px-2 gap-5 rounded-full hover:shadow-[0_2px_4px_rgba(0,0,0,0.18)] cursor-pointer relative' onClick={()=> setShowBox(!showBox)}>
                     <i className="fa-solid fa-bars text-[18px]" />
                     <i className="fa-solid fa-user text-white bg-[#6A6A6A] rounded-full p-2" />
-                  </Link>
+                    {
+                      showBox === true && <ul className="popup absolute bg-[#FFF] w-[250px] border py-2 leading-8 px-2 top-[110%] right-0 z-10 rounded-lg text-[14px]" >
+                      <li className='font-medium'>Sign up</li>
+                      <li className='border-b'>Login</li>
+                      <li>Airbnb your room</li>
+                      <li>Help Center</li>
+                    </ul> 
+                    }
+                    
+                  </div>
                   
                 </li>
               </ul>
@@ -45,7 +56,7 @@ function Navbar() {
           </nav>
 
           <div className='border-[#ddd] w-[850px] shadow-[0_3px_12px_0_rgba(0,0,0,0.1),0_1px_2px_0_rgba(0,0,0,0.08)] px-6 py-3 rounded-full mx-auto mt-4 relative'>
-            <ul className='flex justify-start border-[#ddd]'>
+            <ul className='flex justify-between border-[#ddd]'>
               <li className='basis-1/3 pr-3'>
                 <ul className=' border-r-[#6a6a6a] border-r'>
                   <li className='text-[12px] font-medium'>Where</li>
@@ -74,14 +85,16 @@ function Navbar() {
 
               {
                 active === "Experiences" && <ul className='flex justify-start border-[#ddd]'>
-                  <li className='basis-1/3 border-r-[#6a6a6a] border-r mr-3'>
+                  <li className='basis-2/3 border-r-[#6a6a6a] border-r mr-3'>
                 <ul>
-                  <li className='text-[12px] font-medium '>Date</li>
+                  <li className='text-[12px] font-medium'>Date</li>
                   <li className='text-[14px]'><input type="text" placeholder='Add dates' className='focus:outline-0' /></li>
                 </ul>
               </li>
                   </ul>
                   }
+
+             
 
               <li className='basis-1/3'>
                 <ul>
@@ -94,7 +107,9 @@ function Navbar() {
             <i className="fa-solid fa-magnifying-glass absolute bg-[#FF385C] text-white p-4 rounded-full right-2 top-2 cursor-pointer hover:bg-[#E31C5A]" />
           </div>
         </div>
+        
 
+        {showLang && <Language onClose={()=>setShowLang(false)}/>}
       </header>
     </>
   )

@@ -2,3 +2,6 @@
   font-weight: 600;
   color: #222;
 }
+.userAuth:checked .popup{
+  display: block;
+}
