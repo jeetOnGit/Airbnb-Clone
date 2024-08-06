@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './Navbar.css'
 import '../App.css'
 import Language from './Language'
+import ScrollingBar from './ScrollingBar'
 
 function Navbar() {
   const [active, setActive] = useState("Stays")
@@ -18,22 +19,22 @@ function Navbar() {
         <div className='myContainer mx-auto pt-4 max-xl:px-3'>
           <nav className='flex justify-between items-center'>
             <div className="logo text-[#FF385C]">
-              <Link className='flex justify-between items-baseline font-semibold text-[25px]'>
+              <Link to='/' className='flex justify-between items-baseline font-semibold text-[25px]'>
                 <i className="fa-brands fa-airbnb font-medium me-1 mt-1 text-[37px]" />
                 <h6 className='max-xl:hidden'>airbnb</h6>
               </Link>
             </div>
 
             <div className="tabs ms-[12%]">
-                <ul className="tabs flex justify-between gap-[30px]">
-                  <li  className={`${active === 'Stays' && 'active'}`} onClick={() => activeTab('Stays')}><Link to='/'>Stays</Link></li>
-                  <li className={`${active === 'Experiences' && 'active'}`} onClick={() => activeTab('Experiences')}><Link to='/'>Experiences</Link></li>
+                <ul className="tabs flex justify-between gap-[30px] cursor-pointer">
+                  <li className={`${active === 'Stays' && 'active'}`} onClick={() => activeTab('Stays')}>Stays</li>
+                  <li className={`${active === 'Experiences' && 'active'}`} onClick={() => activeTab('Experiences')}>Experiences</li>
                 </ul>
             </div>
 
             <div>
               <ul className='flex justify-between gap-2 items-center'>
-                <li><Link to='/' className='hover:bg-[#f7f7f7] py-2 px-2 rounded-full text-[#222] font-medium'>Airbnb your home</Link></li>
+                <li><Link to='/airbnbYourRoom' className='hover:bg-[#f7f7f7] py-2 px-2 rounded-full text-[#222] font-medium'>Airbnb your home</Link></li>
                 <li><Link to='/' className='hover:bg-[#f7f7f7] py-1 px-2 rounded-full' onClick={()=>setShowLang(!showLang)}><i className="fa-solid fa-globe" /></Link></li>
                 <li>
                   <div className='userAuth flex justify-between items-center border border-[#ddd] py-1 px-2 gap-5 rounded-full hover:shadow-[0_2px_4px_rgba(0,0,0,0.18)] cursor-pointer relative' onClick={()=> setShowBox(!showBox)}>
@@ -43,7 +44,7 @@ function Navbar() {
                       showBox === true && <ul className="popup absolute bg-[#FFF] w-[250px] border py-2 leading-8 px-2 top-[110%] right-0 z-10 rounded-lg text-[14px]" >
                       <li className='font-medium'>Sign up</li>
                       <li className='border-b'>Login</li>
-                      <li>Airbnb your room</li>
+                      <li><Link to='/airbnbYourRoom'>Airbnb your room</Link></li>
                       <li>Help Center</li>
                     </ul> 
                     }
@@ -106,9 +107,11 @@ function Navbar() {
 
             <i className="fa-solid fa-magnifying-glass absolute bg-[#FF385C] text-white p-4 rounded-full right-2 top-2 cursor-pointer hover:bg-[#E31C5A]" />
           </div>
-        </div>
-        
 
+
+        </div>
+          <ScrollingBar />
+        
         {showLang && <Language onClose={()=>setShowLang(false)}/>}
       </header>
     </>

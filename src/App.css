@@ -8,3 +8,9 @@
 .myContainer{
   max-width: 1289px;
 }
+.scrollWrapper{
+  scrollbar-width: none;
+}
+.scrollBar{
+  scrollbar-width: none;
+}
