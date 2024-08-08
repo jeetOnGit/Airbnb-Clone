@@ -46,14 +46,14 @@ function ScrollingBar() {
   // };
 
   return (
-    <div className='border-t py-5 mt-9 shadow-[rgb(0_0_0/16%)_0_0]'>
+    <div className='border-t pt-4 px-4 mt-9 shadow-[rgb(0_0_0/16%)_0_0] max-md:border-t-0 max-md:mt-0 shadow'>
       <div className='myContainer mx-auto overflow-scroll scrollWrapper'>
         {/* <Slider {...settings}>   */}
       <div className='flex justify-between gap-10 w-max overflow-scroll scrollBar'>
         {
           scrollingOptions.map((item, index) => (
             
-              <ul key={index} className={`text-center flex flex-col text-[#6a6a6a] cursor-pointer ${activeIndex === index && 'text-[#000] border-b-2 border-[#000] pb-2'}`} onClick={()=>activeFilter(index)}>  
+              <ul key={index} className={`text-center flex flex-col text-[#6a6a6a] cursor-pointer hover:text-[#000] hover:border-b-2 hover:border-[#6a6a6a] ${activeIndex === index && '!text-[#000] border-b-2 border-[#000] pb-2'}`} onClick={()=>activeFilter(index)}>  
                   <li className='text-[25px]'>{item.icon}</li>
                   <li className='text-[12px]'>{item.name}</li>
               </ul>
